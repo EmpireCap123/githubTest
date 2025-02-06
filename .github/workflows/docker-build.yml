@@ -1,0 +1,31 @@
+name: Docker Build and Push
+
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to the main branch (adjust if needed)
+  pull_request: # Optional: Build on pull requests too
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build and tag Docker image
+        run: |
+          docker build -t your-docker-registry/your-image-name:${{ github.sha }} .  # Replace with your details
+          docker build -t your-docker-registry/your-image-name:latest . # Add a latest tag (optional, but often useful)
+
+      - name: Login to Docker Hub (or your registry)
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Push Docker image
+        run: |
+          docker push your-docker-registry/your-image-name:${{ github.sha }}
+          docker push your-docker-registry/your-image-name:latest # Push the latest tag (optional)
