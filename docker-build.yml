@@ -2,20 +2,29 @@ name: Docker Build and Push
 
 on:
   push:
-    branches: [ main ]  # Trigger on pushes to the main branch
+    branches: [main] # Trigger on pushes to the main branch
 
 jobs:
   build-and-push:
-    runs-on: ubuntu-latest  # Use an Ubuntu runner
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     steps:
-      - uses: actions/checkout@v3  # Checkout the repository
+      - uses: actions/checkout@v3
 
-      - name: Build the Docker image
-        run: docker build -t woods334/githubTest:latest .  # Build the image
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: .  # Build context (your project root)
+          file: C:/Users/Jeremiah/OneDrive/Documents/GitHub/Dockerfile # Path to your Dockerfile
+          push: true
+          tags: woods334/githubTest:latest
+          # Optional: Add build arguments
+          build-args: |
+            VERSION=1.0.0
 
-      - name: Login to Docker Hub (or your registry)
-        run: docker login -u ${{ secrets.woods334 }} -p ${{ secrets.D.humility1 }}
-
-      - name: Push the Docker image
-        run: docker push woods334/githubTest:latest
+        env:
+          DOCKER_USERNAME: ${{ github.woods334 }}
+          DOCKER_PASSWORD: ${{ secrets.D.humility1 }} # Store your Docker Hub password as a GitHub secret
