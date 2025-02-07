@@ -20,7 +20,7 @@ jobs:
           context: .  # Build context (your project root)
           file: ./Dockerfile # Path to your Dockerfile
           push: true
-          tags: woods334/githubTest:latest
+          tags: woods334/githubtest:latest
           # Optional: Add build arguments
           build-args: |
             VERSION=1.0.0
