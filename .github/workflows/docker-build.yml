@@ -18,7 +18,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .  # Build context (your project root)
-          file: C:/Users/Jeremiah/OneDrive/Documents/GitHub/Dockerfile # Path to your Dockerfile
+          file: ./Dockerfile # Path to your Dockerfile
           push: true
           tags: woods334/githubTest:latest
           # Optional: Add build arguments
@@ -26,5 +26,5 @@ jobs:
             VERSION=1.0.0
 
         env:
-          DOCKER_USERNAME: ${{ github.woods334 }}
-          DOCKER_PASSWORD: ${{ secrets.D.humility1 }} # Store your Docker Hub password as a GitHub secret
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} # Store your Docker Hub password as a GitHub secret
