@@ -5,6 +5,6 @@ WORKDIR /app  # Set the working directory inside the container
 COPY requirements.txt .  # Copy requirements file (if any)
 RUN pip install --no-cache-dir -r requirements.txt  # Install dependencies
 
-COPY data_update.py .  # Copy your Python script
+COPY data_update.ipynb .  # Copy your Python script
 
-CMD ["python", "data_update.py"]  # Command to run your script
+CMD ["python", "data_update.ipynb"]  # Command to run your script
